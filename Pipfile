@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+flask = "*"
+flask-cachebuster = "*"
+flask-sitemap = "*"
+tqdm = "*"
+numpy = "*"
+pandas = "*"
+yadisk = "*"
+bs4 = "*"
+schedule = "*"
+pipfile = "*"
+
+[requires]
+python_version = "3.8"

@@ -1,0 +1,39 @@
+.univer-name{
+    font-size: 3rem;
+    /* padding-left: 4rem; */
+}
+
+.univer-item{
+    margin-bottom: 5rem;
+}
+
+th.sorted.ascending:after {
+	content: "  \2191";
+}
+
+th.sorted.descending:after {
+	content: " \2193";
+}
+
+.hide { 
+    display: none; 
+}
+
+/* .noUi-connects{
+    background-color: violet;
+} */
+
+.noUi-active .noUi-tooltip {
+    display: block;
+}
+.noUi-connect {
+    background: rgb(221, 0, 122);
+}
+
+
+
+/* .modal{
+    width: 86%;
+    height: 86%;
+} */
+

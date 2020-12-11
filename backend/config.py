@@ -1,0 +1,6 @@
+
+UPDATE_EVERY = 30  # in minutes
+
+RUN_PARSER = False
+
+YADISK_DOWNLOAD_STATE = True

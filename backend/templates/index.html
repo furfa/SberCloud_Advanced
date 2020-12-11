@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="ui container stackable">
+    <br>
+
+    <h2 class="ui header">Что мы умеем?</h2>
+    <div class="ui segment">
+        <div class="ui items unstackable" style="padding: 24px;">
+            <div class="item">
+                <div class="ui tiny image">
+                <img loading="lazy" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/smiling-face-with-sunglasses_1f60e.png">
+                
+                </div>
+                <div class="middle aligned content">
+                <p class="header">Показывать факультеты, на которые ты можешь пройти</p>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="item">
+                <div class="ui tiny image">
+                <img loading="lazy" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/chart-increasing_1f4c8.png">
+                </div>
+                <div class="middle aligned content">
+                <p class="header">Показывать динамику изменения балла на последнее бюджетное место</p>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="item">
+                <div class="ui tiny image">
+                <img loading="lazy" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/male-student_1f468-200d-1f393.png">
+                </div>
+                <div class="middle aligned content">
+                <p class="header">Показывать, сколько человек подали документы на другие направления, чтобы ты смог точнее оценить шанс на поступление            
+                </p>
+                </div>
+            </div>
+            </div>
+
+    </div>
+
+    <h2>Выберите свою сумму баллов</h2>
+
+    <div class="ui segment">
+        <div id="bar" style="margin-bottom: 25px;">
+            <div id="soft"></div>
+        </div>
+    </div>
+
+    <h2>Выбери предметы</h2>
+    <div class="ui segment">
+        <div class="ui multiple dropdown">
+            <input type="hidden" name="filters" value="">
+            <i class="chevron down icon"></i>
+            <span class="text">Нажми для выбора</span>
+            <div class="menu">
+                <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="Поиск тегов...">
+                </div>
+                <div class="divider"></div>
+                <div class="header"><i class="tags icon"></i> Предметы </div>
+                <div class="scrolling menu">
+
+                    {% for key, val in disciplines.items() %}
+                    <div class="item" data-value="{{val}}">
+                        <div class="ui red empty circular label"></div>{{key}}
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    Сайт обновлен : <span class="time-update" data-time="{{data[0].parse_date}}"></span>
+    <br>
+    <br>
+    <a class="ui red label">Балл 999 означает, что все места на бюджете заняли БВИ</a>
+    <br>
+    <br>
+    
+    
+
+    <div class="ui very relaxed divided list">
+        {% for univer in data %}
+            {% include 'univer_item.html' %}
+        <!-- <br> -->
+        {% endfor %}
+    </div>
+
+</div>
+
+<div class="ui modal">
+    <div class="header">Балл последнего на бюджете</div>
+    <div class="image content">
+        <div id='PLOT'>
+            <!-- Plotly chart will be drawn inside this DIV -->
+        </div>
+    </div>
+</div>
+{% endblock %}

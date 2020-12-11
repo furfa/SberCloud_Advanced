@@ -1,0 +1,120 @@
+<div class="ui item univer-item">
+    <div class="line_header">
+
+        <div class="ui  doubling grid">
+
+            <div class="sixteen wide tablet four wide computer column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="{{univer.image_url}}" alt="Логотип вуза" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sixteen wide table twelve wide computer column">
+                <div class="ui grid">
+                    <div class="sixteen wide column">
+                        <h2 class="ui huge header">
+                            <div class="univer-name content">
+                                {{univer.name}}
+                                <div class="sub header" style="margin-top: 0.7rem;">
+                                    <i class="chevron right icon"></i>
+                                    <a href="{{univer.link}}">{{univer.link}}</a>
+                                </div>
+                            </div>
+                        </h2>
+                    </div>
+
+                    <div class="sixteen wide computer column">
+                        <div class="ui three doubling statistics small">
+                            <div class="statistic">
+                                <div class="value">
+                                    <i class="marker icon"></i>
+                                    {{univer.city}}
+                                </div>
+                            </div>
+
+                            <div class="ui mini horizontal statistic">
+                                <div class="value">
+                                    <i class="university icon"></i>
+                                    <span class="fac-cnt">
+                                        {{univer.facs|length}}
+                                    </span>
+
+                                </div>
+                                <div class="label"> Факультетов <br> к твоим <br> баллам </div>
+                            </div>
+
+                            <!-- <div class="ui mini horizontal pink statistic">
+                                <div class="value"> 50% </div>
+                                <div class="label"> шанс <br> на поступление</div>
+                            </div> -->
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="fluid ui icon button content-show-btn" style="margin-top: 2rem;"> Подробнее <i
+                        class="angle down icon"></i></div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <table
+        class="ui very basic small celled striped sortable unstackable table annotation transition hidden hidden_table">
+        <thead>
+
+            <tr>
+                <th>Название факультета</th>
+                <th class="int">Балл последнего <br> на бюджете</th>
+                <th class="int">Балл по <br> прошлому году</th>
+                <th class="int">Количество <br> мест</th>
+
+                {% if univer.facs | checkseveralfac %}
+                <th class="no-sort"> Кол-во подавших <br> еще на друг. <br> направ.</th>
+                {% endif%}
+                
+                
+                
+                <th class="no-sort">Обновление</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for key, value in univer.facs.items() %}
+            <tr data-discip="{{value.disciplines}}">
+                <td class="name-col">
+                    <!-- <i class="folder icon"></i>  -->
+                    {% if value.url %}
+                    <a href="{{value.url}}">{{key}}</a>
+                    {% else %}
+                    {{key}}
+                    {% endif %}
+                </td>
+
+                <td class="lastscore graph-show-btn" data-lscore='{{value.last_score|tojson}}'> Последний
+                    балл на бюджет</td>
+                <td class="prevyear" data-prev='{{value.prev_years|tojson}}'> </td>
+                <td class="popup-places small" data-olymp_cnt='{{value.olymp_cnt|tojson}}'>
+                    {{value.free_places}} </td>
+
+                {% if univer.facs | checkseveralfac %}
+                <td class="">{{value.n_severalfac}}</td>
+                {% endif%}
+                
+                <td class="datetimefromcurr">{{value.date_updated}}</td>
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
