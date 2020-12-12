@@ -4,7 +4,7 @@ WORKDIR /code
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY config.sh .
+COPY secure_config.sh .
 
 COPY ./backend ./backend
 

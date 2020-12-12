@@ -64,8 +64,10 @@ def index():
 
     data = raw_data[1]
     disciplines = raw_data[0]
-
+    # return jsonify(data)
     return render_template("index.html", data=data, disciplines=disciplines)
+
+    
 
 
 @app.route("/get_univer_item")
@@ -91,4 +93,5 @@ def page_not_found(e):
 
 if __name__ == "__main__":
     # app.run(host="192.168.105.22", port="8001", debug=True)
-    app.run(host="0.0.0.0", port="8001", debug=True)
+    # app.run(host="0.0.0.0", port="8001", debug=True)
+    app.run(port="8001", debug=True)
