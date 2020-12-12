@@ -1,0 +1,13 @@
+.block_title{
+    padding: 20px 0px;
+}
+
+.noUi-active .noUi-tooltip {
+  display: block;
+}
+/* .noUi-connect {
+    background: rgb(221, 0, 122);
+} */
+#slider .noUi-connect {
+    background:  rgb(221, 0, 122);
+}

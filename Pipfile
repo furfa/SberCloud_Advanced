@@ -17,6 +17,8 @@ yadisk = "*"
 bs4 = "*"
 schedule = "*"
 pipfile = "*"
+flask-sqlalchemy = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.8"

@@ -3,6 +3,7 @@
 from flask import Flask, render_template, send_from_directory, url_for, request, jsonify
 from flask_cachebuster import CacheBuster
 from flask_sitemap import Sitemap
+from flask_sqlalchemy import SQLAlchemy
 
 from tools.functions import get_last_state
 
@@ -16,20 +17,37 @@ if config.RUN_PARSER:
 
 
 app = Flask(__name__)
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Igor:1122@localhost:5432/egengine'
+db = SQLAlchemy(app)
 ext = Sitemap(app=app)
+
+cache_buster = CacheBuster(
+    config={'extensions': ['.js', '.css', '.csv'], 'hash_size': 5})
+cache_buster.init_app(app)
+
+
+# class University(db.Model):
+#     __tablename__ = 'universities'
+
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String())
+#     url = db.Column(db.String())
+#     img_url = db.Column(db.String())
+
+#     def __init__(self, name, url, img_url):
+#         self.name = name
+#         self.url = url
+#         self.img_url = img_url
+
+#     def __repr__(self):
+#         return f"<University {self.name}>
+
 
 
 @ext.register_generator
 def indexx():
     # Not needed if you set SITEMAP_INCLUDE_RULES_WITHOUT_PARAMS=True
     yield 'index', {}
-
-
-cache_buster = CacheBuster(
-    config={'extensions': ['.js', '.css', '.csv'], 'hash_size': 5})
-cache_buster.init_app(app)
-
 
 @app.template_filter()
 def checkseveralfac(d):
@@ -38,17 +56,6 @@ def checkseveralfac(d):
         return list(d.values())[0]["n_severalfac"] != None
     except:
         return False
-
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-
-@app.route('/robots.txt')
-def robotstxt():
-    return send_from_directory(app.static_folder, "robots.txt")
 
 def get_last_state_update():
     raw_data = get_last_state()
@@ -67,8 +74,8 @@ def index():
     # return jsonify(data)
     return render_template("index.html", data=data, disciplines=disciplines)
 
-    
-
+def get_universe_list(score):
+    print('get_universe_list')
 
 @app.route("/get_univer_item")
 def add():
@@ -82,13 +89,6 @@ def add():
     if number < 0:
         return page_not_found(None)
     return render_template("univer_item.html", univer = data[number])
-
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return render_template('404.html'), 404
 
 
 if __name__ == "__main__":

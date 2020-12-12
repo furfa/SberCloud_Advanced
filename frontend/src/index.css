@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.noUi-active .noUi-tooltip {
+  display: block;
+}
+.noUi-connect {
+  background: rgb(221, 0, 122);
+}
